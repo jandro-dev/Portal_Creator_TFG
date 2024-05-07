@@ -1,1 +1,15 @@
-<p>card works!</p>
+<a href="{{ urlCard }}" 
+    class="boton-tarjeta w-100"
+    [style.color]="isHover ? colorHover : color"
+    [style.background-color]="isHover ? color : colorHover"
+    [style.border-color]="isHover ? colorHover : color"
+    (mouseenter)="entradaHover()"
+    (mouseleave)="salidaHover()"
+    target="_blank">
+    <div class="d-flex align-items-center text-start">
+        <div class="mt-2">
+            <p class="titulo-tarjeta">{{ titulo }}</p>
+            <p class="subtitulo-tarjeta">{{ descripcion }}</p>
+        </div>
+    </div>
+</a>

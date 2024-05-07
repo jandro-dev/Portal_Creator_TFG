@@ -1,0 +1,16 @@
+.titulo-tarjeta {
+    font-size: 24px; 
+    margin-bottom: 0;
+}
+
+.subtitulo-tarjeta { 
+    margin-top: 0;
+}
+
+.boton-tarjeta {
+    display: inline-block;
+    padding: 1px 10px;
+    text-decoration: none;
+    border: 2px solid;
+    border-radius: 20px;
+}

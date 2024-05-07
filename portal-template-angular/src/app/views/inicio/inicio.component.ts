@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
