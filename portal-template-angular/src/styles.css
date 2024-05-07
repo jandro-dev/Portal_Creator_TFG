@@ -3,6 +3,14 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "K2D";
+}
+
+@font-face {
+    font-family: "K2D";
+    src: url(assets/fonts/K2D-SemiBold.ttf);
+    font-weight: normal;
+    font-style: normal;
 }
 
 a {
