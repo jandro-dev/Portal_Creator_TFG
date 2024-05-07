@@ -1,0 +1,8 @@
+h1 {
+    font-size: 104px;
+}
+
+span,a {
+    font-size: 25px; 
+    display: block;
+}

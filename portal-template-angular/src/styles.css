@@ -51,3 +51,22 @@ input, button {
     border-radius: 8px !important;
     border: 1px solid black;
 }
+
+.fondoEntrada {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.fondoDefault {
+    background-image: url("/assets/views/fondo.jpg");
+}
+
+.contenidoEntrada {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
