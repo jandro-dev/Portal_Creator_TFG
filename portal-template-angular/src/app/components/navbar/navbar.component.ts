@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'navbarComponent',
   standalone: true,
   imports: [],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-
+  @Input() bgColor: string = '#000';
+  @Input() color: string = '#fff';
 }
