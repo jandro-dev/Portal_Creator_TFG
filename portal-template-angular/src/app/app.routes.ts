@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { WebComponent } from './views/web/web.component';
 import { InicioComponent } from './views/inicio/inicio.component';
 import { PerfilComponent } from './views/perfil/perfil.component';
 import { CategoriaComponent } from './views/categoria/categoria.component';
@@ -10,10 +9,6 @@ export const routes: Routes = [
   {
     path: '',
     component: InicioComponent,
-  },
-  {
-    path: 'web',
-    component: WebComponent,
   },
   {
     path: 'perfil',
