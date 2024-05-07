@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+/* ESTILOS GLOBALES */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+label {
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 4px black;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    color: black;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 8px white;
+}
+
+button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+input, button {
+    border-radius: 8px !important;
+    border: 1px solid black;
+}
