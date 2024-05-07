@@ -1,7 +1,17 @@
 <nav class="navbar navbar-expand-lg fixed-top" [style.background-color]="bgColor">
     <div class="container">
-        <div class="collapse navbar-collapse justify-content-end">
-            <!-- Si existe perfil crea navbar brand con nombreApellido -->
+        <!-- Si no existe perfil se pone esto si existe se pone el nombre del perfil -->
+        <a class="navbar-brand nav-link no-border" href="">
+            <span>PortalCreator</span></a>
+
+        <input id="menu" type="checkbox" (click)="alternarMenu()">
+        <label class="toggle cambio" for="menu">
+            <div id="barra1" class="barras"></div>
+            <div id="barra2" class="barras"></div>
+            <div id="barra3" class="barras"></div>
+        </label>
+
+        <div class="collapse navbar-collapse justify-content-end" [ngClass]="{'show': !isMenuMovil}" id="navbarNav">
             <ul class="navbar-nav">
                 <!-- Esto sucede si no existe el perfil. Cuando se cree el perfil poner Modificar Perfil -->
                 <li class="nav-item">
