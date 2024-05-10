@@ -3,6 +3,7 @@ package portal.template.portaltemplatespring.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,6 +25,11 @@ public class PerfilController {
     
     private final PerfilService perfilService;
 
+    @GetMapping("{id}")
+    public Perfil getPerfil(@PathVariable Integer id) {
+        return perfilService.findById(id);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Perfil createPerfil(@Validated @RequestBody PerfilDTO perfilDTO) {
@@ -35,5 +41,4 @@ public class PerfilController {
         return perfilService.actualizarPerfil(id,perfilDTO);
     }
     
-
 }
