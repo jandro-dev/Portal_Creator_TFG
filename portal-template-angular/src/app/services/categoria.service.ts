@@ -7,7 +7,7 @@ import { Categoria } from '../models/categoria.interface';
 })
 export class CategoriaService {
   private http = inject(HttpClient);
-  private urlBase = 'localhost:8080/api/categorias';
+  private urlBase = 'http://localhost:8080/api/categorias';
 
   listCategorias() {
     return this.http.get<Categoria[]>(`${this.urlBase}`);

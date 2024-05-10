@@ -6,9 +6,8 @@ import { Perfil } from '../models/perfil.interface';
   providedIn: 'root',
 })
 export class PerfilService {
-
   private http = inject(HttpClient);
-  private urlBase = 'localhost:8080/api/perfil';
+  private urlBase = 'http://localhost:8080/api/perfil';
 
   getPerfil(id: number) {
     return this.http.get<Perfil>(`${this.urlBase}/${id}`);
@@ -21,5 +20,4 @@ export class PerfilService {
   updatePerfil(id: number, perfil: Perfil) {
     return this.http.put<Perfil>(`${this.urlBase}/${id}`, perfil);
   }
-  
 }

@@ -8,7 +8,7 @@ import { Portal } from '../models/portal.interface';
 export class PortalService {
   
   private http = inject(HttpClient);
-  private urlBase = 'localhost:8080/api/categorias';
+  private urlBase = 'http://localhost:8080/api/categorias';
 
   listPortales(categoriaID: number) {
     return this.http.get<Portal[]>(`${this.urlBase}/${categoriaID}/portales`);
