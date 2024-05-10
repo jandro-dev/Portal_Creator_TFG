@@ -10,11 +10,23 @@ export const routes: Routes = [
     loadComponent: () => import('./views/perfil/perfil.component'),
   },
   {
+    path: 'perfil/:id/editar',
+    loadComponent: () => import('./views/perfil/perfil.component'),
+  },
+  {
     path: 'categoria',
     loadComponent: () => import('./views/categoria/categoria.component'),
   },
   {
+    path: 'categoria/:cid/editar',
+    loadComponent: () => import('./views/categoria/categoria.component'),
+  },
+  {
     path: 'portal',
+    loadComponent: () => import('./views/portal/portal.component'),
+  },
+  {
+    path: 'categoria/:cid/portal/:pid/editar',
     loadComponent: () => import('./views/portal/portal.component'),
   },
   {
@@ -24,5 +36,5 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'notfound',
-  },
+  }
 ];
