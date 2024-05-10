@@ -1,1 +1,79 @@
-<p>perfil works!</p>
+<div class="container">
+    <h2 class="mt-5 pt-5 mb-5 text-center">
+        @if (perfil) {
+            Editar
+        } @else {
+            Crear
+        } Perfil
+    </h2>
+
+    <div class="row row-cols-lg-2 justify-content-center"> 
+        @if(form) {
+            <div>
+                @if(errors.length) {
+                    <div class="alert alert-danger">
+                        <p>Ha sucedido los siguientes errores:</p>
+                        <ul>
+                            @for(error of errors; track error) {
+                                <li>{{ error }}</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <form [formGroup]="form" (ngSubmit)="save()">
+                    <div class="mb-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" placeholder="Nombre" id="nombre" class="form-control" formControlName="nombre">
+                        @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+                            <p class="invalid-feedback d-block">El nombre es obligatorio</p>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" placeholder="Apellidos" id="apellidos" class="form-control" formControlName="apellidos">
+                        @if(form.get('apellidos')?.hasError('required') && form.get('apellidos')?.touched) {
+                            <p class="invalid-feedback d-block">Los apellidos son obligatorio</p>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="colorWeb1">Color Primario Web</label>
+                        <input type="text" placeholder="#000000" id="colorWeb1" class="form-control" formControlName="colorWeb1">
+                        @if(form.get('colorWeb1')?.hasError('required') && form.get('colorWeb1')?.touched) {
+                            <p class="invalid-feedback d-block">El color primario es obligatorio</p>
+                        }
+                        @if(form.get('colorWeb1')?.hasError('pattern') && form.get('colorWeb1')?.touched) {
+                            <p class="invalid-feedback d-block">El color primario debe ser un código hexadecimal válido</p>
+                        }
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="colorWeb2">Color Secundario Web</label>
+                        <input type="text" placeholder="#DCDCDC" id="colorWeb2" class="form-control" formControlName="colorWeb2">
+                        @if(form.get('colorWeb2')?.hasError('required') && form.get('colorWeb2')?.touched) {
+                            <p class="invalid-feedback d-block">El color secundario es obligatorio</p>
+                        }
+                        @if(form.get('colorWeb2')?.hasError('pattern') && form.get('colorWeb2')?.touched) {
+                            <p class="invalid-feedback d-block">El color secundario debe ser un código hexadecimal válido</p>
+                        }
+                    </div>
+                    
+                    <div class="text-end">
+                        <button type="button" class="btn btn-light" routerLink="/">
+                            Cancelar
+                        </button>
+                        <button class="btn btn-primary ms-2">
+                            @if (perfil) {
+                                Actualizar
+                            } @else {
+                                Crear
+                            } Perfil
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
