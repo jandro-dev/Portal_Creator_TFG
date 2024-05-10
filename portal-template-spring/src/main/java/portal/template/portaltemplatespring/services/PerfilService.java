@@ -17,11 +17,7 @@ public class PerfilService {
     private final ModelMapper mapper;
 
     public Perfil crearPerfil(PerfilDTO perfilDTO) {
-        Perfil perfil = new Perfil();
-        perfil.setNombre(perfilDTO.getNombre());
-        perfil.setApellidos(perfilDTO.getApellidos());
-        perfil.setColorWeb1(perfilDTO.getColorWeb1());
-        perfil.setColorWeb2(perfilDTO.getColorWeb2());
+        Perfil perfil = mapper.map(perfilDTO, Perfil.class);
 
         return perfilRepository.save(perfil);
     }
