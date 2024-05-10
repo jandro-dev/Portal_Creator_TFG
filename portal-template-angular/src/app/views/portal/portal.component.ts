@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './portal.component.html',
   styleUrl: './portal.component.css'
 })
-export class PortalComponent {
+export default class PortalComponent {
 
 }

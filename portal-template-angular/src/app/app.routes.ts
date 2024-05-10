@@ -1,30 +1,25 @@
 import { Routes } from '@angular/router';
-import { InicioComponent } from './views/inicio/inicio.component';
-import { PerfilComponent } from './views/perfil/perfil.component';
-import { CategoriaComponent } from './views/categoria/categoria.component';
-import { PortalComponent } from './views/portal/portal.component';
-import { NotfoundComponent } from './views/notfound/notfound.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: InicioComponent,
+    loadComponent: () => import('./views/inicio/inicio.component'),
   },
   {
     path: 'perfil',
-    component: PerfilComponent,
+    loadComponent: () => import('./views/perfil/perfil.component'),
   },
   {
     path: 'categoria',
-    component: CategoriaComponent,
+    loadComponent: () => import('./views/categoria/categoria.component'),
   },
   {
     path: 'portal',
-    component: PortalComponent,
+    loadComponent: () => import('./views/portal/portal.component'),
   },
   {
     path: 'notfound',
-    component: NotfoundComponent,
+    loadComponent: () => import('./views/notfound/notfound.component'),
   },
   {
     path: '**',

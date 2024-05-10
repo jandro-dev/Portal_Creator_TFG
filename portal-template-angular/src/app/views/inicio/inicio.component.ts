@@ -8,6 +8,6 @@ import { CardComponent } from '../../components/card/card.component';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
-export class InicioComponent {
+export default class InicioComponent {
 
 }
