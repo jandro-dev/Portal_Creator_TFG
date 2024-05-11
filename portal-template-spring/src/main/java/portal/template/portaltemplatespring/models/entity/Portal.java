@@ -36,7 +36,6 @@ public class Portal {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    @JsonIgnore
     private Categoria categoria;
 
 }

@@ -3,6 +3,8 @@ package portal.template.portaltemplatespring.models.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
+@JsonIgnoreProperties("portales")
 public class Categoria {
     
     @Id
