@@ -1,4 +1,4 @@
-<div [style.background-color]="bgColor">
+<div [style.background-color]="bgColor" class="pb-5">
 @if(perfil) {
     <div class="container col-xl-5 col-lg-6 col-md-8 col-11 " [style.color]="color">
         <!-- PERFIL CON DESCRIPCION -->
@@ -20,17 +20,30 @@
         @for(categoria of categorias; track categoria.id) {
         <div class="mt-5">
             <h2 class="mb-4">{{ categoria.nombre }} 
-                <a href="" [style.color]="color">
+                <a [routerLink]="['categoria',categoria.id,'portal']" [style.color]="color" title="Añadir Portal">
                     <i class='ms-4 bx bx-message-square-add'></i>
                 </a>
-                <a [routerLink]="['categoria',categoria.id,'editar']" [style.color]="color">
+                <a [routerLink]="['categoria',categoria.id,'editar']" [style.color]="color" title="Editar Categoria">
                     <i class='ms-2 bx bxs-edit'></i>
                 </a>
-                <a (click)="deleteCategoria(categoria)" [style.color]="color">
+                <a (click)="deleteCategoria(categoria)" [style.color]="color" style="cursor: pointer;" title="Borrar Categoria">
                     <i class='ms-2 bx bx-trash'></i>
                 </a>
             </h2>
-            <span>Hola</span>
+            @if (portalesCategoria[categoria.id]) {
+                @for(portal of portalesCategoria[categoria.id]; track portal.id) {
+                    <div class="mb-3">
+                        <cardComponent
+                            urlCard="{{ portal.link }}"
+                            titulo="{{ portal.nombre }}"
+                            descripcion="{{ portal.descripcion }}"
+                            color="{{ bgColor }}"
+                            colorHover="{{ color }}"
+                            (editar)="editarPortal(categoria.id, portal.id)"
+                            (borrar)="deletePortal(categoria.id,portal)"/>
+                    </div>
+                }
+            }
         </div>
         }
     </div>

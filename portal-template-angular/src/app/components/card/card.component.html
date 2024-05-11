@@ -11,5 +11,14 @@
             <p class="titulo-tarjeta">{{ titulo }}</p>
             <p class="subtitulo-tarjeta">{{ descripcion }}</p>
         </div>
+        
     </div>
 </a>
+<div class="d-flex align-items-center justify-content-end">
+    <a (click)="editar.emit(); $event.stopPropagation()" [style.color]="colorHover" title="Editar Portal">
+        <i class="bx bx-edit bx-sm ms-2" style="cursor: pointer;"></i>
+    </a>
+    <a (click)="borrar.emit(); $event.stopPropagation()" [style.color]="colorHover" title="Borrar Portal">
+        <i class="bx bx-trash bx-sm ms-2" style="cursor: pointer;"></i>
+    </a>
+</div>

@@ -22,7 +22,7 @@ export const routes: Routes = [
     loadComponent: () => import('./views/categoria/categoria.component'),
   },
   {
-    path: 'portal',
+    path: 'categoria/:cid/portal',
     loadComponent: () => import('./views/portal/portal.component'),
   },
   {

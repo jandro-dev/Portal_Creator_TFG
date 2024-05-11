@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'cardComponent',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
 })
@@ -13,6 +14,9 @@ export class CardComponent {
   @Input() descripcion: string = 'Descripcion de la card';
   @Input() color: string = '#fff';
   @Input() colorHover: string = '#000';
+
+  @Output() editar: EventEmitter<void> = new EventEmitter<void>();
+  @Output() borrar: EventEmitter<void> = new EventEmitter<void>();
 
   isHover: boolean = false;
 
