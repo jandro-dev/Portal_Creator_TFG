@@ -1,21 +1,34 @@
 <nav class="navbar navbar-expand-lg fixed-top" [style.background-color]="bgColor">
     <div class="container">
-        <!-- Si no existe perfil se pone esto si existe se pone el nombre del perfil -->
         <a class="navbar-brand nav-link no-border" href="">
-            <span>PortalCreator</span></a>
-
+            @if(perfil) {
+                <span [style.color]="color">{{ perfil.nombre }}</span>
+            } @else {
+                <span [style.color]="color">PortalCreator</span>
+            }
+        </a>
+        
         <input id="menu" type="checkbox" (click)="alternarMenu()">
         <label class="toggle cambio" for="menu">
-            <div id="barra1" class="barras"></div>
-            <div id="barra2" class="barras"></div>
-            <div id="barra3" class="barras"></div>
+            @if(perfil) {
+                <div id="barra1" class="barras" [style.color]="color" [style.--color]="color"></div>
+                <div id="barra2" class="barras" [style.color]="color" [style.--color]="color"></div>
+                <div id="barra3" class="barras" [style.color]="color" [style.--color]="color"></div>
+            } @else {
+                <div id="barra1" class="barras" [style.color]="color" [style.--color]="color"></div>
+                <div id="barra2" class="barras" [style.color]="color" [style.--color]="color"></div>
+                <div id="barra3" class="barras" [style.color]="color" [style.--color]="color"></div>
+            }
         </label>
 
         <div class="collapse navbar-collapse justify-content-end" [ngClass]="{'show': !isMenuMovil}" id="navbarNav">
             <ul class="navbar-nav">
-                <!-- Esto sucede si no existe el perfil. Cuando se cree el perfil poner Modificar Perfil -->
                 <li class="nav-item">
-                    <a class="nav-link" href="" [style.color]="color">Crear Perfil</a>
+                    @if(perfil) {
+                        <a class="nav-link" [routerLink]="['perfil',perfil.id,'editar']" [style.color]="color" [style.--color]="color">Modificar Perfil</a>
+                    } @else {
+                        <a class="nav-link" routerLink="/perfil" [style.color]="color" [style.--color]="color">Crear Perfil</a>
+                    }
                 </li>
             </ul>
         </div>
