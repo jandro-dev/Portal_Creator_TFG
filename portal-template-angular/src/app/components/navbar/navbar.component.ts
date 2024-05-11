@@ -12,13 +12,12 @@ import { Perfil } from '../../models/perfil.interface';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  
   private perfilService = inject(PerfilService);
 
-  perfil? : Perfil;
+  perfil?: Perfil;
   isMenuMovil = true;
   color: string = '#fff';
-  bgColor: string = '#000';
+  bgColor: string = '#1c1c1c';
 
   // Funcion para entrada / salida menu movil
   alternarMenu() {
@@ -30,7 +29,6 @@ export class NavbarComponent implements OnInit {
       this.perfil = perfil;
       this.color = perfil.colorWeb1;
       this.bgColor = perfil.colorWeb2;
-    })
+    });
   }
-  
 }

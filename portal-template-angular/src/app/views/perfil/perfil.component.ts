@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PerfilService } from '../../services/perfil.service';
 import { Perfil } from '../../models/perfil.interface';
@@ -14,7 +14,6 @@ import { Perfil } from '../../models/perfil.interface';
 })
 export default class PerfilComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private router = inject(Router);
   private route = inject(ActivatedRoute);
   private perfilService = inject(PerfilService);
 
@@ -83,7 +82,7 @@ export default class PerfilComponent implements OnInit {
     request.subscribe({
       next: () => {
         this.errors = [];
-        this.router.navigate(['/']);
+        window.location.href = '/';
       },
       error: (response) => {
         this.errors = response.error.errors;
