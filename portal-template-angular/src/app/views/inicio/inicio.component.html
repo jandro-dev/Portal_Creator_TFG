@@ -1,5 +1,33 @@
-<div class="fondoEntrada fondoDefault">
-<div class="contenidoEntrada text-center text-white">
-    <h2>Bienvenido a</h2>
-    <h1>Portal Creator</h1>
+<div [style.background-color]="bgColor">
+@if(perfil) {
+    <div class="container col-xl-5 col-lg-6 col-md-8 col-11 " [style.color]="color">
+        <!-- PERFIL CON DESCRIPCION -->
+        <div class="text-center pt-5 mt-5">
+            <div class="fs-1">{{ perfil.nombre }} {{ perfil.apellidos }}</div>
+        </div>
+        <div class="mt-5 text-start">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
+        <div class="text-center mt-5">
+            <button [style.color]="bgColor" [style.background-color]="color" routerLink="/categoria">
+                Añadir Categoria
+            </button>
+        </div>
+
+        <!-- CADA CATEGORIA CON SU PORTAL -->
+        <div class="mt-5">
+            <h2 class="mb-4">Comunidad</h2>
+            <span>Hola</span>
+        </div>
+    </div>
+} @else {
+    <div class="fondoEntrada fondoDefault">
+        <div class="contenidoEntrada text-center text-white">
+            <h2 class="subtitulo">Bienvenido a</h2>
+            <h1 class="titulo">Portal Creator</h1>
+        </div>
+    </div>
+}
 </div>
