@@ -4,6 +4,9 @@
     margin: 0;
     padding: 0;
     font-family: "K2D";
+    scrollbar-width: thin;
+    scrollbar-color: #1c1c1c white;
+    scroll-behavior: smooth;
 }
 
 @font-face {
