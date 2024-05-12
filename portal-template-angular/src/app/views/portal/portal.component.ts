@@ -34,14 +34,20 @@ export default class PortalComponent implements OnInit {
           this.form = this.fb.group({
             nombre: [portal.nombre, [Validators.required]],
             descripcion: [portal.descripcion, [Validators.required]],
-            link: [portal.link, [Validators.required]],
+            link: [portal.link,[
+                Validators.required,
+                Validators.pattern('(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]')
+              ]],
           });
         });
     } else {
       this.form = this.fb.group({
         nombre: ['', [Validators.required]],
         descripcion: ['', [Validators.required]],
-        link: ['', [Validators.required]],
+        link: ['',[
+            Validators.required,
+            Validators.pattern('(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]')
+          ]]
       });
     }
   }

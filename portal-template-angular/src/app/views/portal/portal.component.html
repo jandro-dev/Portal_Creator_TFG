@@ -43,6 +43,10 @@
                         @if(form.get('link')?.hasError('required') && form.get('link')?.touched) {
                             <p class="invalid-feedback d-block">El link es obligatorio</p>
                         }
+
+                        @if(form.get('link')?.hasError('pattern') && form.get('link')?.touched) {
+                            <p class="invalid-feedback d-block">El link no es válido</p>
+                        }
                     </div>
                     
                     <div class="text-end">
