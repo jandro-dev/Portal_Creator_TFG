@@ -38,6 +38,14 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="descripcion">Descripcion</label>
+                        <textarea placeholder="Descripcion" id="descripcion" class="form-control" formControlName="descripcion"></textarea>
+                        @if(form.get('descripcion')?.hasError('required') && form.get('descripcion')?.touched) {
+                            <p class="invalid-feedback d-block">La descripcion es obligatoria</p>
+                        }
+                    </div>
+
+                    <div class="mb-3">
                         <label for="colorWeb1">Color Primario Web</label>
                         <input type="text" placeholder="#000000" id="colorWeb1" class="form-control" formControlName="colorWeb1">
                         @if(form.get('colorWeb1')?.hasError('required') && form.get('colorWeb1')?.touched) {

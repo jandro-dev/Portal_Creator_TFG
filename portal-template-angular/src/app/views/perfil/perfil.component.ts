@@ -30,6 +30,7 @@ export default class PerfilComponent implements OnInit {
         this.form = this.fb.group({
           nombre: [perfil.nombre, [Validators.required]],
           apellidos: [perfil.apellidos, [Validators.required]],
+          descripcion: [perfil.descripcion, [Validators.required]],
           colorWeb1: [perfil.colorWeb1,
             [
               Validators.required,
@@ -48,13 +49,16 @@ export default class PerfilComponent implements OnInit {
       this.form = this.fb.group({
         nombre: ['', [Validators.required]],
         apellidos: ['', [Validators.required]],
-        colorWeb1: ['',
+        descripcion: ['', [Validators.required]],
+        colorWeb1: [
+          '',
           [
             Validators.required,
             Validators.pattern('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})'),
           ],
         ],
-        colorWeb2: ['',
+        colorWeb2: [
+          '',
           [
             Validators.required,
             Validators.pattern('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})'),

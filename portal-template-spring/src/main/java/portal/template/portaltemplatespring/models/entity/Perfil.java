@@ -28,6 +28,9 @@ public class Perfil {
     private String apellidos;
 
     @NonNull
+    private String descripcion;
+
+    @NonNull
     private String colorWeb1;
 
     @NonNull

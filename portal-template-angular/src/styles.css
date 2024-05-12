@@ -23,6 +23,12 @@ label {
     text-shadow: 0 0 4px black;
 }
 
+textarea {
+    min-height: 5em !important;
+    max-height: 9em;
+    
+}
+
 input {
     width: 100%;
     padding: 8px;

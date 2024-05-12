@@ -14,6 +14,9 @@ public class PerfilDTO {
     @NotBlank(message = "Los apellidos son obligatorio")
     private String apellidos;
 
+    @NotBlank(message = "La descripcion es obligatoria")
+    private String descripcion;
+
     @NotBlank(message = "El color primario es obligatorio")
     private String colorWeb1;
 
