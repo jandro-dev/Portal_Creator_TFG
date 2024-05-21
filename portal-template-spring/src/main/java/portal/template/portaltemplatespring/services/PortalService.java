@@ -19,10 +19,6 @@ public class PortalService {
     private final CategoriaRepository categoriaRepository;
     private final ModelMapper mapper;
 
-    public Iterable<Portal> findAll() {
-        return portalRepository.findAll();
-    }
-
     public Portal findById(Integer categoriaId, Integer portalId) {
         Categoria categoria = categoriaRepository.findById(categoriaId)
                 .orElseThrow(ResourceNotFoundException::new);
