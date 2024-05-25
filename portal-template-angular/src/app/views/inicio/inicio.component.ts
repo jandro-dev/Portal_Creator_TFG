@@ -53,16 +53,7 @@ export default class InicioComponent {
   }
 
   editarPortal(categoriaId: number, portalId: number) {
-    const portal = this.portalesCategoria[categoriaId].find(
-      (p) => p.id === portalId);
-
-    this.router.navigate([
-      'categoria',
-      categoriaId,
-      'portal',
-      portalId,
-      'editar',
-    ]);
+    this.router.navigate(['categoria', categoriaId, 'portal', portalId, 'editar']);
   }
 
   deleteCategoria(categoria: Categoria) {
