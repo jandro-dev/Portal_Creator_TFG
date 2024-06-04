@@ -7,7 +7,7 @@ import { Perfil } from '../models/perfil.interface';
 })
 export class PerfilService {
   private http = inject(HttpClient);
-  private urlBase = 'http://localhost:8080/api/perfil';
+  private urlBase = 'https://portalcreator.onrender.com/api/perfil/1/api/perfil';
 
   getPerfil(id: number) {
     return this.http.get<Perfil>(`${this.urlBase}/${id}`);
