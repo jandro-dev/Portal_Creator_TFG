@@ -7,7 +7,7 @@ import { Portal } from '../models/portal.interface';
 })
 export class PortalService {
   private http = inject(HttpClient);
-  private urlBase = 'https://portalcreator.onrender.com/api/perfil/1/api/categorias';
+  private urlBase = 'https://portalcreator.onrender.com/api/categorias';
 
   listPortales(categoriaID: number) {
     return this.http.get<Portal[]>(`${this.urlBase}/${categoriaID}/portales`);
