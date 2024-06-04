@@ -1,13 +1,10 @@
-FROM ubuntu:latest AS build
-RUN apt-get update
-RUN apt-get install openjdk-21-jdk -y
+FROM maven:4.0.0-openjdk-17 AS build
 
 COPY . .
-RUN chmod +x ./mvnw
-RUN ./mvnw spring-boot:run
+RUN mvn clean package -DskipTests
 
-FROM openjdk:21-jdk-slim
-EXPOSE 8080
+FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /target/portal-template-spring-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
 
 ENTRYPOINT ["java","-jar","app.jar"]
