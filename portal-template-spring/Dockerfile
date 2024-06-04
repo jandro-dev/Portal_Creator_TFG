@@ -3,7 +3,7 @@ RUN apt-get update
 RUN apt-get install openjdk-21-jdk -y
 
 COPY . .
-RUN ./mvnw spring-boot:run
+RUN ./mvnw spring-boot:run --no-daemon
 
 FROM openjdk:21-jdk-slim
 EXPOSE 8080
