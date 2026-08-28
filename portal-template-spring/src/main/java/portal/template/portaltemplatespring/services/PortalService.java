@@ -1,5 +1,7 @@
 package portal.template.portaltemplatespring.services;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +28,18 @@ public class PortalService {
         Portal portal = portalRepository.findById(portalId)
                 .orElseThrow(ResourceNotFoundException::new);
 
-        if (!portal.getCategoria().equals(categoria)) {
+        if (portal.getCategoria() == null || !portal.getCategoria().getId().equals(categoria.getId())) {
             throw new ResourceNotFoundException();
         }
 
         return portal;
+    }
+
+    public List<Portal> findAllByCategoriaId(Integer categoriaId) {
+        categoriaRepository.findById(categoriaId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        return portalRepository.findByCategoriaId(categoriaId);
     }
 
     public Portal crearPortal(Integer categoriaId, PortalDTO portalDTO, Categoria categoria) {

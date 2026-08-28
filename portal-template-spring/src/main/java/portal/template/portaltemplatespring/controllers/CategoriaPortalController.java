@@ -63,11 +63,11 @@ public class CategoriaPortalController {
 
     // CRUD PARA PORTALES DENTRO DE UNA CATEGORIA
 
-    @GetMapping("{categoriaId}/portales")
+    @GetMapping("/{categoriaId}/portales")
     public List<Portal> listPortalesPorCategoria(@PathVariable Integer categoriaId) {
-        Categoria categoria = categoriaService.findById(categoriaId);
-        return categoria.getPortales();
-    }
+
+        return portalService.findAllByCategoriaId(categoriaId);
+    }    
 
     @GetMapping("{categoriaId}/portales/{portalId}")
     public Portal getPortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId) {
