@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { PerfilService } from '../../services/perfil.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Perfil } from '../../models/perfil.interface';
 
 @Component({
@@ -13,6 +13,7 @@ import { Perfil } from '../../models/perfil.interface';
 })
 export class NavbarComponent implements OnInit {
   private perfilService = inject(PerfilService);
+	private router = inject(Router);
 
   perfil?: Perfil;
   isMenuMovil = true;
@@ -31,4 +32,18 @@ export class NavbarComponent implements OnInit {
       this.bgColor = perfil.colorWeb2;
     });
   }
+
+	borrarPerfil(): void {
+  	//const idPerfil = this.perfil.id;	Aplicar al metodo deletePerfil
+
+		this.perfilService.deletePerfil(1).subscribe({
+			next: () => {
+				this.router.navigate(['/'], {
+  			replaceUrl: true,})
+			},
+			error: (error) => {
+				console.error(error);
+			},
+		});
+	}
 }

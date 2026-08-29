@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import portal.template.portaltemplatespring.exception.ResourceNotFoundException;
 import portal.template.portaltemplatespring.models.dto.PerfilDTO;
+import portal.template.portaltemplatespring.models.entity.Categoria;
 import portal.template.portaltemplatespring.models.entity.Perfil;
 import portal.template.portaltemplatespring.repository.PerfilRepository;
 
@@ -32,6 +33,11 @@ public class PerfilService {
 
         mapper.map(perfilDTO, perfilBD);
         return perfilRepository.save(perfilBD);
+    }
+
+    public void borrarPerfil(Integer id) {
+        Perfil perfilBD = findById(id);
+        perfilRepository.delete(perfilBD);
     }
 
 }

@@ -25,7 +25,16 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     @if(perfil) {
-                        <a class="nav-link" [routerLink]="['perfil',perfil.id,'editar']" [style.color]="color" [style.--color]="color">Modificar Perfil</a>
+                        <div class="d-flex flex-row align-items-center gap-3">
+                        
+                            <a class="nav-link" [routerLink]="['perfil',perfil.id,'editar']" [style.color]="color" [style.--color]="color">
+                                Modificar Perfil
+                            </a>
+                            <button type="button" class="nav-link btn btn-link" (click)="borrarPerfil()" [style.color]="color"
+                                [style.--color]="color">
+                                Borrar Perfil
+                            </button>
+                        </div>
                     } @else {
                         <a class="nav-link" routerLink="/perfil" [style.color]="color" [style.--color]="color">Crear Perfil</a>
                     }

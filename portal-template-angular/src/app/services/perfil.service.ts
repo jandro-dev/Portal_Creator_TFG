@@ -20,4 +20,8 @@ export class PerfilService {
   updatePerfil(id: number, perfil: Perfil) {
     return this.http.put<Perfil>(`${this.urlBase}/${id}`, perfil);
   }
+
+	deletePerfil(id: number) {
+		return this.http.delete(`${this.urlBase}/${id}`);
+	}
 }
