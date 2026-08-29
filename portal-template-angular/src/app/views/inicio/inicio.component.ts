@@ -28,12 +28,28 @@ export default class InicioComponent {
   bgColor: string = '';
 
   ngOnInit(): void {
-    this.perfilService.getPerfil(1).subscribe((perfil) => {
+		const idGuardado = localStorage.getItem('perfilId');
+
+		if (!idGuardado) {
+   	 	return;
+  	}
+
+		const idPerfil = parseInt(idGuardado);
+
+    this.perfilService.getPerfil(idPerfil).subscribe({
+			next: (perfil) => {
       this.perfil = perfil;
       this.color = perfil.colorWeb2;
       this.bgColor = perfil.colorWeb1;
-    });
-    this.loadCategorias();
+			this.loadCategorias();
+    },
+			error: (error) => {
+				console.error('Error al obtener el perfil:', error);
+
+				localStorage.removeItem('perfilId');
+				this.router.navigate(['/perfil']);
+			},
+		});
   }
 
   loadCategorias() {
