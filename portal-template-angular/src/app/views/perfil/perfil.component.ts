@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PerfilService } from '../../services/perfil.service';
 import { Perfil } from '../../models/perfil.interface';
@@ -15,6 +15,7 @@ import { Perfil } from '../../models/perfil.interface';
 export default class PerfilComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private perfilService = inject(PerfilService);
 
   form?: FormGroup;
@@ -69,12 +70,12 @@ export default class PerfilComponent implements OnInit {
   }
 
   save() {
-    if (this.form?.invalid) {
-      this.form.markAllAsTouched();
+    if (!this.form || this.form.invalid) {
+      this.form?.markAllAsTouched();
       return;
     }
 
-    const perfilForm = this.form!.value;
+    const perfilForm = this.form.getRawValue();
     let request: Observable<Perfil>;
 
     if (this.perfil) {
@@ -84,9 +85,16 @@ export default class PerfilComponent implements OnInit {
     }
 
     request.subscribe({
-      next: () => {
+      next: (perfilGuardado: Perfil) => {
         this.errors = [];
-        window.location.href = '/';
+
+				// Guardamos el ID que devuelve el backend
+				localStorage.setItem(
+					'perfilId',
+					perfilGuardado.id.toString()
+				);
+
+				this.router.navigate(['/']);
       },
       error: (response) => {
         this.errors = response.error.errors;

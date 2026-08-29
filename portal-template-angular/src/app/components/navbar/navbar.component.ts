@@ -26,23 +26,45 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.perfilService.getPerfil(1).subscribe((perfil) => {
-      this.perfil = perfil;
-      this.color = perfil.colorWeb1;
-      this.bgColor = perfil.colorWeb2;
+
+		const idGuardado = localStorage.getItem('perfilId');
+
+		if (!idGuardado) {
+      return;
+    }
+
+		const idPerfil = parseInt(idGuardado);
+
+		this.perfilService.getPerfil(idPerfil).subscribe({
+      next: (perfil) => {
+        this.perfil = perfil;
+        this.color = perfil.colorWeb1;
+        this.bgColor = perfil.colorWeb2;
+      },
+      error: (error) => {
+        console.error('Error al obtener el perfil:', error);
+
+        localStorage.removeItem('perfilId');
+        this.perfil = undefined;
+      },
     });
   }
 
 	borrarPerfil(): void {
-  	//const idPerfil = this.perfil.id;	Aplicar al metodo deletePerfil
 
-		this.perfilService.deletePerfil(1).subscribe({
+		 if (!this.perfil) {
+      return;
+    }
+  	const idPerfil = this.perfil.id
+
+		this.perfilService.deletePerfil(idPerfil).subscribe({
 			next: () => {
-				this.router.navigate(['/'], {
-  			replaceUrl: true,})
+				localStorage.removeItem('perfilId');
+				this.perfil = undefined;
+				this.router.navigate(['/'])
 			},
 			error: (error) => {
-				console.error(error);
+				console.error('Error al borrar el perfil:', error);
 			},
 		});
 	}
