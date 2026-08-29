@@ -15,7 +15,6 @@ import { Perfil } from '../../models/perfil.interface';
 export default class PerfilComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private perfilService = inject(PerfilService);
 
   form?: FormGroup;
@@ -94,7 +93,7 @@ export default class PerfilComponent implements OnInit {
 					perfilGuardado.id.toString()
 				);
 
-				this.router.navigate(['/']);
+				window.location.href = "/"
       },
       error: (response) => {
         this.errors = response.error.errors;

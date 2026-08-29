@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit {
 			next: () => {
 				localStorage.removeItem('perfilId');
 				this.perfil = undefined;
-				this.router.navigate(['/'])
+				window.location.href = '/';
 			},
 			error: (error) => {
 				console.error('Error al borrar el perfil:', error);
