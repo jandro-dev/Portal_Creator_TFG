@@ -23,7 +23,7 @@ export default class PortalComponent implements OnInit {
   portal?: Portal;
   errors: string[] = [];
 	//
-	perfil?: Perfil
+	perfilId?: number
 
   ngOnInit(): void {
 		const idGuardado = localStorage.getItem('perfilId');
@@ -32,13 +32,13 @@ export default class PortalComponent implements OnInit {
    	 	return;
   	}
 
-		const idPerfil = parseInt(idGuardado);
+		this.perfilId = parseInt(idGuardado);
     const cid = this.route.snapshot.paramMap.get('cid'); // Id categoria del path de rutas
     const pid = this.route.snapshot.paramMap.get('pid'); // Id portal del path de rutas
 
     if (cid && pid) {
       this.portalService
-        .getPortal(idPerfil, parseInt(cid), parseInt(pid))
+        .getPortal(this.perfilId, parseInt(cid), parseInt(pid))
         .subscribe((portal) => {
           this.portal = portal;
           this.form = this.fb.group({
@@ -70,25 +70,23 @@ export default class PortalComponent implements OnInit {
   }
 
   savePortal(categoriaID: number) {
-    if (this.form?.invalid || !this.perfil) {
+    if (this.form?.invalid || !this.perfilId) {
       this.form?.markAllAsTouched();
       return;
     }
-
-		const idPerfil = this.perfil.id
 
     const portalForm = this.form!.value;
     let request: Observable<Portal>;
 
     if (this.portal) {
       request = this.portalService.updatePortal(
-				idPerfil,
+				this.perfilId,
         categoriaID,
         this.portal.id,
         portalForm
       );
     } else {
-      request = this.portalService.createPortal(idPerfil, categoriaID, portalForm);
+      request = this.portalService.createPortal(this.perfilId, categoriaID, portalForm);
     }
 
     request.subscribe({

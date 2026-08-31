@@ -21,8 +21,8 @@ export default class CategoriaComponent implements OnInit {
   form?: FormGroup;
   categoria?: Categoria;
   errors: string[] = [];
-	//
-	perfil?: Perfil
+	
+	perfilId?: number
 
   ngOnInit(): void {
 		const idGuardado = localStorage.getItem('perfilId');
@@ -31,12 +31,12 @@ export default class CategoriaComponent implements OnInit {
    	 	return;
   	}
 
-		const idPerfil = parseInt(idGuardado);
+		this.perfilId = parseInt(idGuardado);
     const cid = this.route.snapshot.paramMap.get('cid');
 
     if (cid) {
 			//
-      this.categoriaService.getCategoria(parseInt(cid), idPerfil).subscribe((categoria) => {
+      this.categoriaService.getCategoria(parseInt(cid), this.perfilId).subscribe((categoria) => {
         this.categoria = categoria;
         this.form = this.fb.group({
           nombre: [categoria.nombre, [Validators.required]]
@@ -51,21 +51,20 @@ export default class CategoriaComponent implements OnInit {
 
   save() {
 		//
-    if (this.form?.invalid || !this.perfil) {
+    if (this.form?.invalid || !this.perfilId) {
 			this.form?.markAllAsTouched();
       return;
     }
-		const idPerfil = this.perfil.id
 
     const categoriaForm = this.form!.value;
     let request: Observable<Categoria>;
 
     if (this.categoria) {
 			//
-      request = this.categoriaService.updateCategoria(this.categoria.id, idPerfil, categoriaForm);
+      request = this.categoriaService.updateCategoria(this.categoria.id, this.perfilId, categoriaForm);
     } else {
 			//
-      request = this.categoriaService.createCategoria(idPerfil, categoriaForm);
+      request = this.categoriaService.createCategoria(this.perfilId, categoriaForm);
     }
 
     request.subscribe({
