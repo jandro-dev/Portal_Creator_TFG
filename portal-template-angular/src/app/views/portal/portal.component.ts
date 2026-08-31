@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PortalService } from '../../services/portal.service';
 import { Portal } from '../../models/portal.interface';
 import { Observable } from 'rxjs';
+import { Perfil } from '../../models/perfil.interface';
 
 @Component({
   selector: 'app-portal',
@@ -21,14 +22,23 @@ export default class PortalComponent implements OnInit {
   form?: FormGroup;
   portal?: Portal;
   errors: string[] = [];
+	//
+	perfil?: Perfil
 
   ngOnInit(): void {
+		const idGuardado = localStorage.getItem('perfilId');
+
+		if (!idGuardado) {
+   	 	return;
+  	}
+
+		const idPerfil = parseInt(idGuardado);
     const cid = this.route.snapshot.paramMap.get('cid'); // Id categoria del path de rutas
     const pid = this.route.snapshot.paramMap.get('pid'); // Id portal del path de rutas
 
     if (cid && pid) {
       this.portalService
-        .getPortal(parseInt(cid), parseInt(pid))
+        .getPortal(idPerfil, parseInt(cid), parseInt(pid))
         .subscribe((portal) => {
           this.portal = portal;
           this.form = this.fb.group({
@@ -60,22 +70,25 @@ export default class PortalComponent implements OnInit {
   }
 
   savePortal(categoriaID: number) {
-    if (this.form?.invalid) {
-      this.form.markAllAsTouched();
+    if (this.form?.invalid || !this.perfil) {
+      this.form?.markAllAsTouched();
       return;
     }
+
+		const idPerfil = this.perfil.id
 
     const portalForm = this.form!.value;
     let request: Observable<Portal>;
 
     if (this.portal) {
       request = this.portalService.updatePortal(
+				idPerfil,
         categoriaID,
         this.portal.id,
         portalForm
       );
     } else {
-      request = this.portalService.createPortal(categoriaID, portalForm);
+      request = this.portalService.createPortal(idPerfil, categoriaID, portalForm);
     }
 
     request.subscribe({

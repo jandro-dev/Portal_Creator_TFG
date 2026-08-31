@@ -13,7 +13,6 @@ import { Perfil } from '../../models/perfil.interface';
 })
 export class NavbarComponent implements OnInit {
   private perfilService = inject(PerfilService);
-	private router = inject(Router);
 
   perfil?: Perfil;
   isMenuMovil = true;
@@ -52,7 +51,7 @@ export class NavbarComponent implements OnInit {
 
 	borrarPerfil(): void {
 
-		 if (!this.perfil) {
+		if (!this.perfil) {
       return;
     }
   	const idPerfil = this.perfil.id

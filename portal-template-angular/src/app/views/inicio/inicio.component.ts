@@ -41,7 +41,7 @@ export default class InicioComponent {
       this.perfil = perfil;
       this.color = perfil.colorWeb2;
       this.bgColor = perfil.colorWeb1;
-			this.loadCategorias();
+			this.loadCategorias(perfil.id);
     },
 			error: (error) => {
 				console.error('Error al obtener el perfil:', error);
@@ -52,18 +52,18 @@ export default class InicioComponent {
 		});
   }
 
-  loadCategorias() {
-    this.categoriaService.listCategorias().subscribe((categorias) => {
+  loadCategorias(perfilId: number) {
+    this.categoriaService.listCategorias(perfilId).subscribe((categorias) => {
       this.categorias = categorias;
 
       this.categorias.forEach((categoria) => {
-        this.loadPortales(categoria.id);
+        this.loadPortales(perfilId, categoria.id);
       });
     });
   }
 
-  loadPortales(categoriaID: number) {
-    this.portalService.listPortales(categoriaID).subscribe((portales) => {
+  loadPortales(perfilId: number,categoriaID: number) {
+    this.portalService.listPortales(perfilId, categoriaID).subscribe((portales) => {
       this.portalesCategoria[categoriaID] = portales;
     });
   }
@@ -73,14 +73,24 @@ export default class InicioComponent {
   }
 
   deleteCategoria(categoria: Categoria) {
-    this.categoriaService.deleteCategoria(categoria.id).subscribe(() => {
-      this.loadCategorias();
+		if (!this.perfil) {
+      return;
+    }
+
+    const perfilId = this.perfil.id;
+    this.categoriaService.deleteCategoria(categoria.id, perfilId).subscribe(() => {
+      this.loadCategorias(perfilId);
     });
   }
 
   deletePortal(categoriaID: number, portal: Portal) {
-    this.portalService.deletePortal(categoriaID, portal.id).subscribe(() => {
-      this.loadCategorias();
+		if (!this.perfil) {
+      return;
+    }
+
+    const perfilId = this.perfil.id;
+    this.portalService.deletePortal(perfilId, categoriaID, portal.id).subscribe(() => {
+      this.loadCategorias(perfilId);
     });
   }
 }

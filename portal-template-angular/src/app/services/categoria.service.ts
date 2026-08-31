@@ -9,23 +9,23 @@ export class CategoriaService {
   private http = inject(HttpClient);
   private urlBase = 'https://portalcreator.onrender.com/api/categorias';
 
-  listCategorias() {
-    return this.http.get<Categoria[]>(`${this.urlBase}`);
+  listCategorias(perfilId: number) {
+    return this.http.get<Categoria[]>(`${this.urlBase}?perfilId=${perfilId}`);
   }
 
-  getCategoria(id: number) {
-    return this.http.get<Categoria>(`${this.urlBase}/${id}`);
+  getCategoria(id: number, perfilId: number) {
+    return this.http.get<Categoria>(`${this.urlBase}/${id}?perfilId=${perfilId}`);
   }
 
-  createCategoria(categoria: Categoria) {
-    return this.http.post<Categoria>(`${this.urlBase}`, categoria);
+  createCategoria(perfilId: number, categoria: Categoria) {
+    return this.http.post<Categoria>(`${this.urlBase}?perfilId=${perfilId}`, categoria);
   }
 
-  updateCategoria(id: number, categoria: Categoria) {
-    return this.http.put<Categoria>(`${this.urlBase}/${id}`, categoria);
+  updateCategoria(id: number, perfilId: number, categoria: Categoria) {
+    return this.http.put<Categoria>(`${this.urlBase}/${id}?perfilId=${perfilId}`, categoria);
   }
 
-  deleteCategoria(id: number) {
-    return this.http.delete<void>(`${this.urlBase}/${id}`);
+  deleteCategoria(id: number, perfilId: number) {
+    return this.http.delete<void>(`${this.urlBase}/${id}?perfilId=${perfilId}`);
   }
 }

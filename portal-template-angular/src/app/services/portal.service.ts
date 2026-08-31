@@ -9,33 +9,33 @@ export class PortalService {
   private http = inject(HttpClient);
   private urlBase = 'https://portalcreator.onrender.com/api/categorias';
 
-  listPortales(categoriaID: number) {
-    return this.http.get<Portal[]>(`${this.urlBase}/${categoriaID}/portales`);
+  listPortales(perfilId: number, categoriaID: number) {
+    return this.http.get<Portal[]>(`${this.urlBase}/${categoriaID}/portales?perfilId=${perfilId}`);
   }
 
-  getPortal(categoriaID: number, portalID: number) {
+  getPortal(perfilId: number, categoriaID: number, portalID: number) {
     return this.http.get<Portal>(
-      `${this.urlBase}/${categoriaID}/portales/${portalID}`
+      `${this.urlBase}/${categoriaID}/portales/${portalID}?perfilId=${perfilId}`
     );
   }
 
-  createPortal(categoriaID: number, portal: Portal) {
+  createPortal(perfilId: number, categoriaID: number, portal: Portal) {
     return this.http.post<Portal>(
-      `${this.urlBase}/${categoriaID}/portales`,
+      `${this.urlBase}/${categoriaID}/portales?perfilId=${perfilId}`,
       portal
     );
   }
 
-  updatePortal(categoriaID: number, portalID: number, portal: Portal) {
+  updatePortal(perfilId: number, categoriaID: number, portalID: number, portal: Portal) {
     return this.http.put<Portal>(
-      `${this.urlBase}/${categoriaID}/portales/${portalID}`,
+      `${this.urlBase}/${categoriaID}/portales/${portalID}?perfilId=${perfilId}`,
       portal
     );
   }
 
-  deletePortal(categoriaID: number, portalID: number) {
+  deletePortal(perfilId: number, categoriaID: number, portalID: number) {
     return this.http.delete<void>(
-      `${this.urlBase}/${categoriaID}/portales/${portalID}`
+      `${this.urlBase}/${categoriaID}/portales/${portalID}?perfilId=${perfilId}`
     );
   }
 }
