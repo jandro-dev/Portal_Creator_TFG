@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,62 +36,61 @@ public class CategoriaPortalController {
     // CRUD PARA CATEGORIAS
 
     @GetMapping
-    public Iterable<Categoria> listCategorias() {
-        return categoriaService.findAll();
+    public Iterable<Categoria> listCategorias(@RequestParam Integer perfilId) {
+        return categoriaService.findAllByPerfilId(perfilId);
     }
 
     @GetMapping("{id}")
-    public Categoria getCategoria(@PathVariable Integer id) {
-        return categoriaService.findById(id);
+    public Categoria getCategoria(@PathVariable Integer id, @RequestParam Integer perfilId) {
+        return categoriaService.findByIdAndPerfilId(id, perfilId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Categoria createCategoria(@Validated @RequestBody CategoriaDTO categoriaDTO) {
-        return categoriaService.crearCategoria(categoriaDTO);
+    public Categoria createCategoria(@RequestParam Integer perfilId, @Validated @RequestBody CategoriaDTO categoriaDTO) {
+        return categoriaService.crearCategoria(perfilId, categoriaDTO);
     }
 
     @PutMapping("{id}")
-    public Categoria updateCategoria(@PathVariable Integer id, @Validated @RequestBody CategoriaDTO categoriaDTO) {
-        return categoriaService.actualizarCategoria(id, categoriaDTO);
+    public Categoria updateCategoria(@PathVariable Integer id,@RequestParam Integer perfilId, @Validated @RequestBody CategoriaDTO categoriaDTO) {
+        return categoriaService.actualizarCategoria(id, perfilId, categoriaDTO);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")
-    public void deleteCategoria(@PathVariable Integer id) {
-        categoriaService.borrarCategoria(id);
+    public void deleteCategoria(@PathVariable Integer id, @RequestParam Integer perfilId) {
+        categoriaService.borrarCategoria(id, perfilId);
     }
 
     // CRUD PARA PORTALES DENTRO DE UNA CATEGORIA
 
     @GetMapping("/{categoriaId}/portales")
-    public List<Portal> listPortalesPorCategoria(@PathVariable Integer categoriaId) {
+    public List<Portal> listPortalesPorCategoria(@PathVariable Integer categoriaId, @RequestParam Integer perfilId) {
 
-        return portalService.findAllByCategoriaId(categoriaId);
+        return portalService.findAllByCategoriaId(categoriaId, perfilId);
     }    
 
     @GetMapping("{categoriaId}/portales/{portalId}")
-    public Portal getPortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId) {
-        return portalService.findById(categoriaId, portalId);
+    public Portal getPortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId, @RequestParam Integer perfilId) {
+        return portalService.findById(perfilId, categoriaId, portalId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("{categoriaId}/portales")
-    public Portal createPortal(@PathVariable Integer categoriaId, @Validated @RequestBody PortalDTO portalDTO) {
-        Categoria categoria = categoriaService.findById(categoriaId);
-        return portalService.crearPortal(categoriaId, portalDTO, categoria);
+    public Portal createPortal(@PathVariable Integer categoriaId, @RequestParam Integer perfilId, @Validated @RequestBody PortalDTO portalDTO) {
+        return portalService.crearPortal(perfilId, categoriaId, portalDTO);
     }
 
     @PutMapping("{categoriaId}/portales/{portalId}")
-    public Portal updatePortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId,
+    public Portal updatePortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId, @RequestParam Integer perfilId,
             @Validated @RequestBody PortalDTO portalDTO) {
-        return portalService.actualizarPortal(categoriaId, portalId, portalDTO);
+        return portalService.actualizarPortal(perfilId, categoriaId, portalId, portalDTO);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{categoriaId}/portales/{portalId}")
-    public void deletePortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId) {
-        portalService.borrarPortal(categoriaId, portalId);
+    public void deletePortal(@PathVariable Integer categoriaId, @PathVariable Integer portalId, @RequestParam Integer perfilId) {
+        portalService.borrarPortal(perfilId, categoriaId, portalId);
     }
 
 }
